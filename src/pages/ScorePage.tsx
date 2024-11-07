@@ -5,7 +5,9 @@ import './ScorePage.css';
 const ScorePage: React.FC = () => {
   const { cats } = useScore();
   const sortedCats = [...cats].sort((a, b) => b.score - a.score);
-  const totalVotes = sortedCats.reduce((sum, cat) => sum + cat.score, 0);
+
+  const totalVotes = sortedCats.reduce((sum, { score }) => sum + score, 0);
+
   let rank = 1;
   const ranks = sortedCats.map((_, index) => {
     if (index > 0 && sortedCats[index].score === sortedCats[index - 1].score) {
