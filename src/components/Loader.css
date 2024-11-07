@@ -1,15 +1,16 @@
+/* Full-screen loader overlay */
 .loader {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Prend tout l'écran */
-  background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond légère */
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Toujours au-dessus des autres éléments */
+  z-index: 1000;
 }
 
 .loader-cat {
@@ -25,7 +26,7 @@
   animation: fade 1s infinite alternate;
 }
 
-/* Animation du chat pour simuler un miaulement */
+/* Keyframe for cat "bouncing" effect */
 @keyframes miaou {
   0% {
     transform: translateY(0) scale(1);
@@ -35,7 +36,7 @@
   }
 }
 
-/* Animation du texte pour donner un effet de "miaulement" */
+/* Keyframe for text pulsing opacity */
 @keyframes fade {
   0% {
     opacity: 1;

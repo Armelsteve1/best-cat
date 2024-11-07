@@ -1,3 +1,4 @@
+/* Main container for score page */
 .score-page {
   display: flex;
   flex-direction: column;
@@ -14,11 +15,12 @@
 
 .score-page h1 {
   font-size: 2rem;
-  margin-bottom: 10px;
-  margin-top: 0;
+  margin: 0 0 10px;
   text-align: center;
+  color: #1e3a8a;
 }
 
+/* Grid container for cat items */
 .cat-grid {
   margin-top: -124px;
   display: grid;
@@ -29,6 +31,7 @@
   margin-bottom: 30px;
 }
 
+/* Individual cat item styling */
 .cat-item {
   display: flex;
   flex-direction: column;
@@ -57,22 +60,26 @@
   margin-bottom: 10px;
 }
 
+.cat-name,
+.cat-score {
+  font-weight: bold;
+}
+
 .cat-name {
   font-size: 1.2rem;
-  font-weight: bold;
   color: #374151;
 }
 
 .cat-score {
   font-size: 1rem;
   color: #1e3a8a;
-  font-weight: bold;
 }
 
 .back-button-container {
   margin-top: 20px;
 }
 
+/* Button styles */
 .back-button {
   padding: 10px 20px;
   background-color: #1e3a8a;
@@ -94,10 +101,10 @@
   color: #1e3a8a;
 }
 
-/* Podium Styles */
+/* Podium styles */
 .first {
   grid-column: 2 / 3;
-  background-color: #d3a738;
+  background-color: #ffd700;
   color: #ffffff;
   transform: translateY(340px);
   height: 329px;
@@ -105,19 +112,21 @@
 
 .second {
   grid-column: 1 / 2;
-  background-color: #dcc773;
+  background-color: #b9f2ff;
   color: #ffffff;
   transform: translateY(10px);
 }
 
 .third {
   grid-column: 3 / 4;
-  background-color: #4e5d7a;
+  background-color: #cd7f32;
   color: #ffffff;
   transform: translateY(27px);
-  height: 264px;
+  height: 274px;
   font-size: 0.9rem;
 }
+
+/* Floating button styling */
 .centered-floating-button {
   width: 235px;
   height: 60px;
@@ -140,15 +149,6 @@
 
 .centered-floating-button:hover {
   background-color: #1e3a8a;
-}
-
-.back-button:hover {
-  background-color: #374151;
-}
-
-.match-count {
-  font-size: 1rem;
-  color: #1e3a8a;
 }
 
 /* Responsive adjustments for mobile */

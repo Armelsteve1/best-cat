@@ -13,7 +13,7 @@
 }
 
 .vote-button:hover {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Slight enlargement on hover */
 }
 
 .cat-icon {
@@ -31,6 +31,7 @@
   left: 10px;
 }
 
+/* Keyframe animation for like "flying" effect */
 @keyframes fly {
   0% {
     opacity: 1;

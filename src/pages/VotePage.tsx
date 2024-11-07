@@ -26,20 +26,22 @@ const VotePage: React.FC = () => {
     loadCats();
   }, [setCats]);
 
+  // Selects a random pair of cats to be displayed
   const pickRandomPair = (catsList: Cat[]) => {
-    const shuffled = [...catsList].sort(() => 0.5 - Math.random());
-    setCurrentPair([shuffled[0], shuffled[1]]);
+    const shuffledCats = [...catsList].sort(() => 0.5 - Math.random());
+    setCurrentPair([shuffledCats[0], shuffledCats[1]]);
   };
 
-  const handleVote = (winnerId: string) => {
-    incrementScore(winnerId);
+  // Handles a vote, updates score and match count
+  const handleVote = (selectedCatId: string) => {
+    incrementScore(selectedCatId);
     incrementMatchCount();
-    setAnimatingButtonId(winnerId);
+    setAnimatingButtonId(selectedCatId);
 
     setTimeout(() => {
       setAnimatingButtonId(null);
       pickRandomPair(cats);
-    }, 600);
+    }, 600); // Animation duration
   };
 
   if (isLoading) {
@@ -53,28 +55,25 @@ const VotePage: React.FC = () => {
         <h1>BEST CAT</h1>
       </div>
       <div className="cat-container">
-        {currentPair &&
-          currentPair.map((cat) => (
-            <div key={cat.id} className="cat-card">
-              <div className="cat-image-container">
-                <img
-                  src={cat.url}
-                  alt="Cute cat"
-                  className="cat-image"
-                  loading="lazy"
-                />
-              </div>
-              <div className="cat-name">
-                Chat {cat.id} - Score : {cat.score || 0}
-              </div>
-              <div className="vote-button-container">
-                <VoteButton
-                  onClick={() => handleVote(cat.id)}
-                  isAnimating={animatingButtonId === cat.id}
-                />
-              </div>
+        {currentPair?.map((cat) => (
+          <div key={cat.id} className="cat-card">
+            <div className="cat-image-container">
+              <img
+                src={cat.url}
+                alt={`Chat ${cat.id}`}
+                className="cat-image"
+                loading="lazy"
+              />
             </div>
-          ))}
+            <div className="cat-name">Chat {cat.id}</div>
+            <div className="vote-button-container">
+              <VoteButton
+                onClick={() => handleVote(cat.id)}
+                isAnimating={animatingButtonId === cat.id}
+              />
+            </div>
+          </div>
+        ))}
       </div>
       <div className="footer">
         <Link to="/scores" className="score-button">

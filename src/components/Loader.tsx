@@ -1,8 +1,7 @@
-import React from 'react';
 import './Loader.css';
-import catIcon from '../assets/best_cat_logo.webp'; // Assurez-vous d'avoir un icône de chat
+import catIcon from '../assets/best_cat_logo.webp';
 
-const Loader: React.FC = () => {
+const Loader = () => {
   return (
     <div className="loader">
       <img src={catIcon} alt="Chat qui miaule" className="loader-cat" />
