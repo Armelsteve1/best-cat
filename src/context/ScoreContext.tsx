@@ -7,9 +7,9 @@ interface ScoreContextType {
   incrementScore: (id: string) => void;
   setCats: (cats: Cat[]) => void;
   incrementMatchCount: () => void;
+  resetMatchCount: () => void;
 }
 
-// Interface pour typer les props de ScoreProvider
 interface ScoreProviderProps {
   children: ReactNode;
 }
@@ -18,23 +18,43 @@ const ScoreContext = createContext<ScoreContextType | undefined>(undefined);
 
 export const ScoreProvider: React.FC<ScoreProviderProps> = ({ children }) => {
   const [cats, setCats] = useState<Cat[]>([]);
-  const [matchCount, setMatchCount] = useState(0);
+
+  const [matchCount, setMatchCount] = useState<number>(() => {
+    const storedMatchCount = localStorage.getItem('matchCount');
+    return storedMatchCount ? parseInt(storedMatchCount, 10) : 0;
+  });
 
   const incrementScore = (id: string) => {
     setCats((prevCats) =>
       prevCats.map((cat) =>
-        cat.id === id ? { ...cat, score: cat.score + 1 } : cat
+        cat.id === id ? { ...cat, score: (cat.score || 0) + 1 } : cat
       )
     );
   };
 
   const incrementMatchCount = () => {
-    setMatchCount((prevCount) => prevCount + 1);
+    setMatchCount((prevCount) => {
+      const newCount = prevCount + 1;
+      localStorage.setItem('matchCount', newCount.toString());
+      return newCount;
+    });
+  };
+
+  const resetMatchCount = () => {
+    setMatchCount(0);
+    localStorage.setItem('matchCount', '0');
   };
 
   return (
     <ScoreContext.Provider
-      value={{ cats, matchCount, incrementScore, setCats, incrementMatchCount }}
+      value={{
+        cats,
+        matchCount,
+        incrementScore,
+        setCats,
+        incrementMatchCount,
+        resetMatchCount,
+      }}
     >
       {children}
     </ScoreContext.Provider>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import VoteButton from '../components/VoteButton';
+import Loader from '../components/Loader';
 import { useScore } from '../context/ScoreContext';
 import { fetchCats } from '../services/catService';
 import './VotePage.css';
@@ -13,12 +14,14 @@ const VotePage: React.FC = () => {
   const [animatingButtonId, setAnimatingButtonId] = useState<string | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadCats = async () => {
       const fetchedCats = await fetchCats();
       setCats(fetchedCats);
       pickRandomPair(fetchedCats);
+      setIsLoading(false);
     };
     loadCats();
   }, [setCats]);
@@ -39,6 +42,10 @@ const VotePage: React.FC = () => {
     }, 600);
   };
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="vote-page">
       <div className="header">
@@ -50,9 +57,16 @@ const VotePage: React.FC = () => {
           currentPair.map((cat) => (
             <div key={cat.id} className="cat-card">
               <div className="cat-image-container">
-                <img src={cat.url} alt="Cute cat" className="cat-image" />
+                <img
+                  src={cat.url}
+                  alt="Cute cat"
+                  className="cat-image"
+                  loading="lazy"
+                />
               </div>
-              <div className="cat-name">Chat {cat.id}</div>
+              <div className="cat-name">
+                Chat {cat.id} - Score : {cat.score || 0}
+              </div>
               <div className="vote-button-container">
                 <VoteButton
                   onClick={() => handleVote(cat.id)}
