@@ -7,7 +7,7 @@ const ScorePage: React.FC = () => {
   const sortedCats = [...cats].sort((a, b) => b.score - a.score);
   const totalVotes = sortedCats.reduce((sum, cat) => sum + cat.score, 0);
   let rank = 1;
-  const ranks = sortedCats.map((cat, index) => {
+  const ranks = sortedCats.map((_, index) => {
     if (index > 0 && sortedCats[index].score === sortedCats[index - 1].score) {
       return rank;
     } else {
