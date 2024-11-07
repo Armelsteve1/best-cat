@@ -4,10 +4,14 @@ import './ScorePage.css';
 
 const ScorePage: React.FC = () => {
   const { cats, matchCount, resetMatchCount } = useScore();
-  const sortedCats = [...cats].sort((a, b) => b.score - a.score);
 
-  const totalVotes = sortedCats.reduce((sum, { score }) => sum + score, 0);
+  // Sort cats by score in descending order
+  const sortedCats = [...cats].sort((catA, catB) => catB.score - catA.score);
 
+  // Calculate total votes by summing up all cat scores
+  const totalVotes = sortedCats.reduce((sum, cat) => sum + cat.score, 0);
+
+  // Handle button click to reset match count and return to vote page
   const handleBackToVote = () => {
     resetMatchCount();
     window.history.back();
@@ -18,19 +22,21 @@ const ScorePage: React.FC = () => {
       <img src="/best_cat_logo.webp" alt="Best Cat Logo" className="logo" />
       <h1>BEST CAT</h1>
 
+      {/* Show message if there are no votes, else display sorted cat list */}
       {totalVotes === 0 ? (
         <div className="no-votes">Aucun vote effectué</div>
       ) : (
         <div className="cat-grid">
           {sortedCats.map((cat, index) => {
-            let podiumClass = '';
-            if (index === 0) {
-              podiumClass = 'first';
-            } else if (index === 1) {
-              podiumClass = 'second';
-            } else if (index === 2) {
-              podiumClass = 'third';
-            }
+            // Assign podium class based on ranking
+            const podiumClass =
+              index === 0
+                ? 'first'
+                : index === 1
+                  ? 'second'
+                  : index === 2
+                    ? 'third'
+                    : '';
 
             return (
               <div key={cat.id} className={`cat-item ${podiumClass}`}>
@@ -47,6 +53,8 @@ const ScorePage: React.FC = () => {
           })}
         </div>
       )}
+
+      {/* Floating button to return to vote page and reset match count */}
       <div className="centered-floating-button" onClick={handleBackToVote}>
         Revenir au vote <br /> ({matchCount} matchs joués)
       </div>

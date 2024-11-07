@@ -1,3 +1,4 @@
+/* Main vote page layout */
 .vote-page {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
   background-color: #f9fafb;
 }
 
+/* Header section */
 .header {
   display: flex;
   flex-direction: column;
@@ -26,16 +28,17 @@
   text-align: center;
 }
 
+/* Container for cat cards */
 .cat-container {
   display: flex;
   justify-content: center;
   gap: 100px;
   max-width: 800px;
   width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
+/* Individual cat card styling */
 .cat-card {
   display: flex;
   flex-direction: column;
@@ -75,6 +78,7 @@
   text-align: center;
 }
 
+/* Vote button container styling */
 .vote-button-container {
   margin-top: 10px;
 }
@@ -94,6 +98,7 @@
   background-color: #374151;
 }
 
+/* Footer section */
 .footer {
   display: flex;
   flex-direction: column;
@@ -121,6 +126,7 @@
   color: #1e3a8a;
 }
 
+/* Responsive layout adjustments */
 @media (max-width: 768px) {
   .cat-container {
     gap: 30px;
