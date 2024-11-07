@@ -3,10 +3,15 @@ import { useScore } from '../context/ScoreContext';
 import './ScorePage.css';
 
 const ScorePage: React.FC = () => {
-  const { cats, matchCount } = useScore();
+  const { cats, matchCount, resetMatchCount } = useScore();
   const sortedCats = [...cats].sort((a, b) => b.score - a.score);
 
   const totalVotes = sortedCats.reduce((sum, { score }) => sum + score, 0);
+
+  const handleBackToVote = () => {
+    resetMatchCount();
+    window.history.back();
+  };
 
   return (
     <div className="score-page">
@@ -42,10 +47,7 @@ const ScorePage: React.FC = () => {
           })}
         </div>
       )}
-      <div
-        className="centered-floating-button"
-        onClick={() => window.history.back()}
-      >
+      <div className="centered-floating-button" onClick={handleBackToVote}>
         Revenir au vote <br /> ({matchCount} matchs joués)
       </div>
     </div>

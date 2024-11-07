@@ -1,0 +1,46 @@
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Prend tout l'écran */
+  background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond légère */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Toujours au-dessus des autres éléments */
+}
+
+.loader-cat {
+  width: 100px;
+  height: 100px;
+  animation: miaou 1s infinite alternate;
+}
+
+.loader-text {
+  font-size: 1.2rem;
+  color: #1e3a8a;
+  margin-top: 10px;
+  animation: fade 1s infinite alternate;
+}
+
+/* Animation du chat pour simuler un miaulement */
+@keyframes miaou {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-10px) scale(1.1);
+  }
+}
+
+/* Animation du texte pour donner un effet de "miaulement" */
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
