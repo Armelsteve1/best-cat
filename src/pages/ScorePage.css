@@ -2,52 +2,31 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 5px;
   background-color: #f9fafb;
+  margin-top: 0;
 }
 
 .logo {
-  width: 50px;
+  width: 70px;
   margin-bottom: 10px;
 }
 
 .score-page h1 {
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 0;
   text-align: center;
 }
 
 .cat-grid {
+  margin-top: -124px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   width: 100%;
   max-width: 1000px;
   margin-bottom: 30px;
-}
-
-.first {
-  grid-column: 2 / 3;
-  background-color: #1e3a8a;
-  color: #ffffff;
-  transform: translateY(-10px);
-  padding: 20px;
-}
-
-.second {
-  grid-column: 1 / 2;
-  background-color: #3b4a6b;
-  color: #ffffff;
-  transform: translateY(10px);
-  padding: 15px;
-}
-
-.third {
-  grid-column: 3 / 4;
-  background-color: #4e5d7a;
-  color: #ffffff;
-  transform: translateY(10px);
-  padding: 15px;
 }
 
 .cat-item {
@@ -60,10 +39,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.2s;
-}
-
-.cat-item:hover {
-  transform: scale(1.05);
+  position: relative;
 }
 
 .cat-rank {
@@ -112,10 +88,85 @@
   background-color: #374151;
 }
 
-.no-votes {
+.match-count {
+  margin-top: 10px;
+  font-size: 1rem;
   color: #1e3a8a;
-  font-size: 1.2rem;
+}
+
+/* Podium Styles */
+.first {
+  grid-column: 2 / 3;
+  background-color: #d3a738;
+  color: #ffffff;
+  transform: translateY(340px);
+  height: 329px;
+}
+
+.second {
+  grid-column: 1 / 2;
+  background-color: #dcc773;
+  color: #ffffff;
+  transform: translateY(10px);
+}
+
+.third {
+  grid-column: 3 / 4;
+  background-color: #4e5d7a;
+  color: #ffffff;
+  transform: translateY(27px);
+  height: 264px;
+  font-size: 0.9rem;
+}
+.centered-floating-button {
+  width: 235px;
+  height: 60px;
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  padding: 20px 40px;
+  border-radius: 10px;
   font-weight: bold;
-  margin: 20px 0;
+  font-size: 1.2rem;
   text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+  z-index: 1000;
+  background-color: rgba(55, 65, 81, 0.9);
+}
+
+.centered-floating-button:hover {
+  background-color: #1e3a8a;
+}
+
+.back-button:hover {
+  background-color: #374151;
+}
+
+.match-count {
+  font-size: 1rem;
+  color: #1e3a8a;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .cat-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .first,
+  .second,
+  .third {
+    grid-column: auto;
+    transform: translateY(0);
+    height: auto;
+  }
+
+  .score-page h1 {
+    font-size: 1.5rem;
+  }
 }

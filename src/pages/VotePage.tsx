@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import VoteButton from '../components/VoteButton';
 import { useScore } from '../context/ScoreContext';
+import { fetchCats } from '../services/catService';
 import './VotePage.css';
 import { Cat } from '../types/Cat';
 
 const VotePage: React.FC = () => {
-  const { cats, incrementScore, setCats } = useScore();
-  const [currentPair, setCurrentPair] = React.useState<[Cat, Cat] | null>(null);
+  const { cats, incrementScore, setCats, incrementMatchCount, matchCount } =
+    useScore();
+  const [currentPair, setCurrentPair] = useState<[Cat, Cat] | null>(null);
+  const [animatingButtonId, setAnimatingButtonId] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const loadCats = async () => {
-      const response = await fetch('https://data.latelier.co/cats.json');
-      const data = await response.json();
-      setCats(data.images.map((cat: any) => ({ ...cat, score: 0 })));
-      pickRandomPair(data.images);
+      const fetchedCats = await fetchCats();
+      setCats(fetchedCats);
+      pickRandomPair(fetchedCats);
     };
     loadCats();
   }, [setCats]);
@@ -26,15 +30,21 @@ const VotePage: React.FC = () => {
 
   const handleVote = (winnerId: string) => {
     incrementScore(winnerId);
-    pickRandomPair(cats);
+    incrementMatchCount();
+    setAnimatingButtonId(winnerId);
+
+    setTimeout(() => {
+      setAnimatingButtonId(null);
+      pickRandomPair(cats);
+    }, 600);
   };
 
   return (
     <div className="vote-page">
-      <h1>Vote for the Cutest Cat</h1>
-      <Link to="/scores" className="score-button">
-        View Scores
-      </Link>
+      <div className="header">
+        <img src="/best_cat_logo.webp" alt="Best Cat Logo" className="logo" />
+        <h1>BEST CAT</h1>
+      </div>
       <div className="cat-container">
         {currentPair &&
           currentPair.map((cat) => (
@@ -42,14 +52,21 @@ const VotePage: React.FC = () => {
               <div className="cat-image-container">
                 <img src={cat.url} alt="Cute cat" className="cat-image" />
               </div>
+              <div className="cat-name">Chat {cat.id}</div>
               <div className="vote-button-container">
                 <VoteButton
                   onClick={() => handleVote(cat.id)}
-                  isAnimating={false}
+                  isAnimating={animatingButtonId === cat.id}
                 />
               </div>
             </div>
           ))}
+      </div>
+      <div className="footer">
+        <Link to="/scores" className="score-button">
+          Voir le classement des chats
+        </Link>
+        <div className="match-count">{matchCount} matchs joués</div>
       </div>
     </div>
   );
