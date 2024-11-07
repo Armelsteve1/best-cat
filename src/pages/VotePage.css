@@ -4,23 +4,36 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 5px;
   background-color: #f9fafb;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 70px;
+  margin-bottom: 5px;
 }
 
 .vote-page h1 {
   font-size: 2rem;
-  margin-bottom: 20px;
+  color: #1e3a8a;
   text-align: center;
 }
 
 .cat-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  gap: 100px;
   max-width: 800px;
   width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .cat-card {
@@ -29,51 +42,123 @@
   align-items: center;
   position: relative;
   padding: 10px;
-  background-color: #f3f4f6;
+  background-color: #d3d3d3;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(158, 157, 157, 0.2);
   width: 220px;
-  max-height: 280px;
 }
 
 .cat-image-container {
-  width: 100%;
-  height: 350px;
+  width: 87%;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   border-radius: 10px;
-  border: 3px solid #374151;
   background-color: #fff;
 }
 
 .cat-image {
-  width: 100%;
-  height: 100%;
+  width: 238px !important;
+  height: 188px !important;
+  border-radius: 10px;
   object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.cat-name {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #181616;
+  text-align: center;
 }
 
 .vote-button-container {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 10px;
 }
+
+.vote-button-container button {
+  background-color: #1e3a8a;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.vote-button-container button:hover {
+  background-color: #374151;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .score-button {
   color: #ffffff;
   background-color: #1e3a8a;
   font-weight: bold;
-  text-decoration: none;
   padding: 10px 20px;
-  margin-bottom: 20px;
   border-radius: 5px;
+  text-decoration: none;
   transition: background-color 0.3s ease;
-  border: none;
 }
 
 .score-button:hover {
   background-color: #374151;
+}
+
+.match-count {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #1e3a8a;
+}
+
+@media (max-width: 768px) {
+  .cat-container {
+    gap: 30px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cat-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .vote-page h1 {
+    font-size: 1.5rem;
+  }
+
+  .match-count {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-container {
+    gap: 20px;
+  }
+
+  .cat-card {
+    width: 90%;
+  }
+
+  .vote-page h1 {
+    font-size: 1.2rem;
+  }
+
+  .vote-button-container button,
+  .score-button {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 1rem;
+  }
 }
