@@ -1,3 +1,5 @@
+@import '../styles/variables.css';
+
 /* Main vote page layout */
 .vote-page {
   display: flex;
@@ -6,7 +8,7 @@
   justify-content: center;
   min-height: 100vh;
   padding: 5px;
-  background-color: #f9fafb;
+  background-color: var(--background-light);
 }
 
 /* Header section */
@@ -23,8 +25,8 @@
 }
 
 .vote-page h1 {
-  font-size: 2rem;
-  color: #1e3a8a;
+  font-size: var(--font-size-large);
+  color: var(--primary-color);
   text-align: center;
 }
 
@@ -44,10 +46,10 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding: 10px;
+  padding: var(--cat-item-padding);
   background-color: #d3d3d3;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(158, 157, 157, 0.2);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
   width: 220px;
 }
 
@@ -58,21 +60,22 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border-radius: 10px;
-  background-color: #fff;
+  border-radius: var(--border-radius);
+  background-color: var(--text-color-light);
 }
 
-.cat-image {
+.cat-image-vote {
   width: 238px !important;
   height: 188px !important;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   object-fit: cover;
   margin-bottom: 10px;
+  margin-top: 18px;
 }
 
 .cat-name {
   margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: var(--font-size-small);
   font-weight: bold;
   color: #181616;
   text-align: center;
@@ -84,8 +87,8 @@
 }
 
 .vote-button-container button {
-  background-color: #1e3a8a;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 5px;
@@ -95,7 +98,7 @@
 }
 
 .vote-button-container button:hover {
-  background-color: #374151;
+  background-color: var(--secondary-color);
 }
 
 /* Footer section */
@@ -107,8 +110,8 @@
 }
 
 .score-button {
-  color: #ffffff;
-  background-color: #1e3a8a;
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 5px;
@@ -117,13 +120,13 @@
 }
 
 .score-button:hover {
-  background-color: #374151;
+  background-color: var(--secondary-color);
 }
 
 .match-count {
   margin-top: 10px;
-  font-size: 1rem;
-  color: #1e3a8a;
+  font-size: var(--font-size-medium);
+  color: var(--primary-color);
 }
 
 /* Responsive layout adjustments */
@@ -140,11 +143,11 @@
   }
 
   .vote-page h1 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-medium);
   }
 
   .match-count {
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
   }
 }
 

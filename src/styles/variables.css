@@ -1,0 +1,39 @@
+:root {
+  /* Primary colors */
+  --primary-color: #1e3a8a;
+  --secondary-color: #374151;
+  --like-color: #ea580c;
+
+  /* Background colors */
+  --background-light: #f9fafb;
+  --background-cat-item: #f3f4f6;
+
+  /* Text colors */
+  --text-color-light: #ffffff;
+  --text-color-dark: #374151;
+
+  /* Podium colors */
+  --podium-first: #142a5d;
+  --podium-second: #2e4569;
+  --podium-third: #7a8899;
+
+  /* Button colors */
+  --button-background: #374151;
+  --button-hover-background: #1e3a8a;
+
+  /* Circle border color for podium */
+  --circle-border-color: #ffffff;
+
+  /* Box shadows */
+  --box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --box-shadow-button: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /* Sizing */
+  --cat-item-padding: 15px;
+  --border-radius: 10px;
+
+  /* Font sizes */
+  --font-size-large: 1.8rem;
+  --font-size-medium: 1.5rem;
+  --font-size-small: 1.2rem;
+}

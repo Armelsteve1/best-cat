@@ -1,10 +1,12 @@
+@import '../styles/variables.css';
+
 /* Main container for score page */
 .score-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 5px;
-  background-color: #f9fafb;
+  background-color: var(--background-light);
   margin-top: 0;
 }
 
@@ -17,7 +19,7 @@
   font-size: 2rem;
   margin: 0 0 10px;
   text-align: center;
-  color: #1e3a8a;
+  color: var(--primary-color);
 }
 
 /* Grid container for cat items */
@@ -36,28 +38,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f3f4f6;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-cat-item);
+  padding: var(--cat-item-padding);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-light);
   text-align: center;
   transition: transform 0.2s;
   position: relative;
 }
 
-.cat-rank {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1e3a8a;
-  margin-bottom: 5px;
-}
-
-.cat-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
+/* Image styling */
+.cat-image-score {
+  width: 238px !important;
+  height: 188px !important;
+  border-radius: var(--border-radius);
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 53px;
+  margin-top: 48px;
 }
 
 .cat-name,
@@ -66,13 +63,13 @@
 }
 
 .cat-name {
-  font-size: 1.2rem;
-  color: #374151;
+  font-size: var(--font-size-small);
+  color: var(--text-color-dark);
 }
 
 .cat-score {
   font-size: 1rem;
-  color: #1e3a8a;
+  color: var(--primary-color);
 }
 
 .back-button-container {
@@ -82,8 +79,8 @@
 /* Button styles */
 .back-button {
   padding: 10px 20px;
-  background-color: #1e3a8a;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -92,38 +89,76 @@
 }
 
 .back-button:hover {
-  background-color: #374151;
+  background-color: var(--secondary-color);
 }
 
 .match-count {
   margin-top: 10px;
   font-size: 1rem;
-  color: #1e3a8a;
+  color: var(--primary-color);
 }
 
 /* Podium styles */
 .first {
   grid-column: 2 / 3;
-  background-color: #ffd700;
-  color: #ffffff;
-  transform: translateY(340px);
-  height: 329px;
+  background-color: var(--podium-first);
+  color: var(--text-color-light);
+  transform: translateY(373px);
+  height: 377px;
 }
 
 .second {
   grid-column: 1 / 2;
-  background-color: #b9f2ff;
-  color: #ffffff;
-  transform: translateY(10px);
+  background-color: var(--podium-second);
+  color: var(--text-color-light);
+  transform: translateY(-18px);
 }
 
 .third {
   grid-column: 3 / 4;
-  background-color: #cd7f32;
-  color: #ffffff;
-  transform: translateY(27px);
-  height: 274px;
+  background-color: var(--podium-third);
+  color: var(--text-color-light);
+  transform: translateY(-10px);
+  height: 332px;
   font-size: 0.9rem;
+}
+
+/* Style for rank numbers with a white circle for the top 3 */
+.cat-rank {
+  font-size: var(--font-size-large);
+  font-weight: bold;
+  background: transparent;
+  position: absolute;
+  top: 13px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* Specific styles for podium ranks */
+.first .cat-rank,
+.second .cat-rank,
+.third .cat-rank {
+  border: 2px solid var(--circle-border-color);
+  color: var(--text-color-light);
+}
+
+/* Styles for non-podium cats */
+.cat-item:not(.first):not(.second):not(.third) .cat-rank {
+  border: 2px solid var(--podium-first);
+  color: var(--podium-first);
+}
+
+.first .cat-name,
+.second .cat-name,
+.third .cat-name,
+.first .cat-score,
+.second .cat-score,
+.third .cat-score {
+  color: var(--text-color-light);
 }
 
 /* Floating button styling */
@@ -134,21 +169,21 @@
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  color: #ffffff;
+  color: var(--text-color-light);
   padding: 20px 40px;
   border-radius: 10px;
   font-weight: bold;
   font-size: 1.2rem;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow-button);
   transition: background-color 0.3s;
   z-index: 1000;
-  background-color: rgba(55, 65, 81, 0.9);
+  background-color: var(--button-background);
 }
 
 .centered-floating-button:hover {
-  background-color: #1e3a8a;
+  background-color: var(--button-hover-background);
 }
 
 /* Responsive adjustments for mobile */
