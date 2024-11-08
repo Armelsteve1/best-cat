@@ -61,7 +61,7 @@ const VotePage: React.FC = () => {
               <img
                 src={cat.url}
                 alt={`Chat ${cat.id}`}
-                className="cat-image"
+                className="cat-image-vote"
                 loading="lazy"
               />
             </div>

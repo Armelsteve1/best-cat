@@ -1,8 +1,11 @@
+@import '../styles/variables.css';
+
+/* Vote button styling */
 .vote-button {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #1e3a8a;
+  background-color: var(--primary-color);
   border: none;
   cursor: pointer;
   display: flex;
@@ -16,16 +19,18 @@
   transform: scale(1.1); /* Slight enlargement on hover */
 }
 
+/* Cat icon styling */
 .cat-icon {
   width: 60px;
   height: 60px;
   object-fit: contain;
 }
 
+/* Like animation styling */
 .like-animation {
   position: absolute;
-  color: #ea580c;
-  font-size: 24px;
+  color: var(--like-color);
+  font-size: var(--font-size-medium);
   animation: fly 0.6s ease forwards;
   top: -10px;
   left: 10px;

@@ -1,3 +1,5 @@
+@import '../styles/variables.css';
+
 /* Full-screen loader overlay */
 .loader {
   display: flex;
@@ -20,8 +22,8 @@
 }
 
 .loader-text {
-  font-size: 1.2rem;
-  color: #1e3a8a;
+  font-size: var(--font-size-small);
+  color: var(--primary-color);
   margin-top: 10px;
   animation: fade 1s infinite alternate;
 }

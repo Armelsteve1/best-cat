@@ -40,11 +40,13 @@ const ScorePage: React.FC = () => {
 
             return (
               <div key={cat.id} className={`cat-item ${podiumClass}`}>
-                <div className="cat-rank">#{index + 1}</div>
+                <div className={`cat-rank ${podiumClass}-rank`}>
+                  {index + 1}
+                </div>
                 <img
                   src={cat.url}
                   alt={`Chat ${cat.id}`}
-                  className="cat-image"
+                  className="cat-image-score"
                 />
                 <div className="cat-name">Chat {cat.id}</div>
                 <div className="cat-score">Score: {cat.score} pts</div>
@@ -53,7 +55,6 @@ const ScorePage: React.FC = () => {
           })}
         </div>
       )}
-
       {/* Floating button to return to vote page and reset match count */}
       <div className="centered-floating-button" onClick={handleBackToVote}>
         Revenir au vote <br /> ({matchCount} matchs joués)
