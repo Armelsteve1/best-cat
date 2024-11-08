@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import VoteButton from '../components/VoteButton';
 import Loader from '../components/Loader';
 import { useScore } from '../context/ScoreContext';
-import { fetchCats } from '../services/catService';
 import './VotePage.css';
 import { Cat } from '../types/Cat';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const VotePage: React.FC = () => {
-  const { cats, incrementScore, setCats, incrementMatchCount, matchCount } =
-    useScore();
+  const { cats, setCats, incrementMatchCount, matchCount } = useScore();
   const [currentPair, setCurrentPair] = useState<[Cat, Cat] | null>(null);
   const [animatingButtonId, setAnimatingButtonId] = useState<string | null>(
     null
@@ -18,30 +18,47 @@ const VotePage: React.FC = () => {
 
   useEffect(() => {
     const loadCats = async () => {
-      const fetchedCats = await fetchCats();
-      setCats(fetchedCats);
-      pickRandomPair(fetchedCats);
-      setIsLoading(false);
+      try {
+        const response = await fetch(`${API_BASE_URL}/cats`);
+        if (!response.ok)
+          throw new Error('Erreur lors du chargement des chats');
+        const fetchedCats = await response.json();
+        setCats(fetchedCats);
+        pickRandomPair(fetchedCats);
+      } catch (error) {
+        console.error('Erreur lors du chargement des chats :', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     loadCats();
   }, [setCats]);
 
-  // Selects a random pair of cats to be displayed
   const pickRandomPair = (catsList: Cat[]) => {
     const shuffledCats = [...catsList].sort(() => 0.5 - Math.random());
     setCurrentPair([shuffledCats[0], shuffledCats[1]]);
   };
 
-  // Handles a vote, updates score and match count
-  const handleVote = (selectedCatId: string) => {
-    incrementScore(selectedCatId);
-    incrementMatchCount();
-    setAnimatingButtonId(selectedCatId);
+  const handleVote = async (selectedCatId: string) => {
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/cats/${selectedCatId}/vote`,
+        {
+          method: 'POST',
+        }
+      );
+      if (!response.ok) throw new Error('Erreur lors du vote pour le chat');
 
-    setTimeout(() => {
-      setAnimatingButtonId(null);
-      pickRandomPair(cats);
-    }, 600); // Animation duration
+      incrementMatchCount();
+      setAnimatingButtonId(selectedCatId);
+
+      setTimeout(() => {
+        setAnimatingButtonId(null);
+        pickRandomPair(cats);
+      }, 600);
+    } catch (error) {
+      console.error('Erreur lors du vote pour le chat :', error);
+    }
   };
 
   if (isLoading) {
@@ -59,7 +76,7 @@ const VotePage: React.FC = () => {
           <div key={cat.id} className="cat-card">
             <div className="cat-image-container">
               <img
-                src={cat.url}
+                src={cat.name}
                 alt={`Chat ${cat.id}`}
                 className="cat-image-vote"
                 loading="lazy"

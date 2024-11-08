@@ -1,34 +1,53 @@
-import React from 'react';
-import { useScore } from '../context/ScoreContext';
+import React, { useEffect, useState } from 'react';
+import Loader from '../components/Loader';
 import './ScorePage.css';
+import { useScore } from '../context/ScoreContext';
+import { Cat } from '../types/Cat';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const ScorePage: React.FC = () => {
-  const { cats, matchCount, resetMatchCount } = useScore();
+  const { matchCount } = useScore();
+  const [cats, setCats] = useState<Cat[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Sort cats by score in descending order
-  const sortedCats = [...cats].sort((catA, catB) => catB.score - catA.score);
+  useEffect(() => {
+    const loadVotedCats = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/voted-cats`);
+        if (!response.ok)
+          throw new Error('Erreur lors du chargement des chats votés');
+        const votedCats = await response.json();
+        const sortedCats = votedCats.sort(
+          (catA: Cat, catB: Cat) => catB.score - catA.score
+        );
+        setCats(sortedCats);
+      } catch (error) {
+        console.error('Erreur lors du chargement des chats votés :', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadVotedCats();
+  }, []);
 
-  // Calculate total votes by summing up all cat scores
-  const totalVotes = sortedCats.reduce((sum, cat) => sum + cat.score, 0);
-
-  // Handle button click to reset match count and return to vote page
+  const totalVotes = cats.reduce((sum, cat) => sum + cat.score, 0);
   const handleBackToVote = () => {
-    resetMatchCount();
     window.history.back();
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="score-page">
       <img src="/best_cat_logo.webp" alt="Best Cat Logo" className="logo" />
       <h1>BEST CAT</h1>
-
-      {/* Show message if there are no votes, else display sorted cat list */}
       {totalVotes === 0 ? (
         <div className="no-votes">Aucun vote effectué</div>
       ) : (
         <div className="cat-grid">
-          {sortedCats.map((cat, index) => {
-            // Assign podium class based on ranking
+          {cats.map((cat, index) => {
             const podiumClass =
               index === 0
                 ? 'first'
@@ -44,7 +63,7 @@ const ScorePage: React.FC = () => {
                   {index + 1}
                 </div>
                 <img
-                  src={cat.url}
+                  src={cat.name}
                   alt={`Chat ${cat.id}`}
                   className="cat-image-score"
                 />
@@ -55,7 +74,6 @@ const ScorePage: React.FC = () => {
           })}
         </div>
       )}
-      {/* Floating button to return to vote page and reset match count */}
       <div className="centered-floating-button" onClick={handleBackToVote}>
         Revenir au vote <br /> ({matchCount} matchs joués)
       </div>
